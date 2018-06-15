@@ -1,0 +1,7 @@
+@mixin flex($type, $wrap) {
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-flow: $type $wrap; /* Safari 6.1+ */
+    
+    display: flex;
+    flex-flow: $type $wrap;
+}

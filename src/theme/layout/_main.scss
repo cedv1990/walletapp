@@ -1,0 +1,32 @@
+@import '../_fonts';
+@import '_header';
+@import '_content';
+
+html,
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    background-color: $bgColor;
+    overflow: hidden;
+    color: $primaryColor;
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.02rem;
+}
+
+* {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*-webkit-transition: .3s ease-out;
+    transition: .3s ease-out;*/
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

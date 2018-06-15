@@ -1,0 +1,70 @@
+header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    display: flex;
+    flex-flow: row nowrap;
+
+    &:not(.mobile){
+        padding: .5rem;
+        top: 0;
+        margin: 0 3.5rem;
+        border-bottom: solid 1px $colorDisabled;
+
+        > nav {
+            justify-content: flex-start;
+
+            > a{
+                flex: 1;
+                padding: .5rem 1rem;
+
+                &.actual{
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    &.mobile{
+        bottom: 0;
+        border-top: solid 1px $colorDisabled;
+
+        > nav {
+            flex: 1;
+            > a{
+                flex: 1;
+                padding: .5rem;
+
+                > span{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    > nav {
+        display: flex;
+        flex-flow: row nowrap;
+        margin-left: 1.5rem;
+
+        > a{
+            color: $primaryColor;
+            opacity: $opacityColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover:not(.actual){
+                opacity: 1;
+            }
+        }
+    }
+
+    > aside.logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
