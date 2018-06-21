@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Utilities } from '../../shared/utilities';
+import { Encapsulates } from '../../shared/encapsulates';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +10,11 @@ import { Utilities } from '../../shared/utilities';
 export class DashboardComponent implements OnInit {
 
   mobile: boolean;
+  encapsulates: Encapsulates;
 
-  constructor() { }
+  constructor() {
+    this.encapsulates = new Encapsulates();
+  }
 
   ngOnInit() {
     this.mobile = Utilities.isMobile();

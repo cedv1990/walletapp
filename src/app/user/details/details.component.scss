@@ -1,0 +1,72 @@
+section.encabezado{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+section.datos{
+    display: flex;
+
+    &:not(.mobile){
+        flex-flow: column nowrap;
+    }
+    &.mobile {
+        flex-flow: row wrap;
+    }
+
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        > .value {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: flex-end;
+            justify-content: center;
+
+            > .num {
+                font-size: 1.2rem;
+            }
+
+            > .hour {
+                font-size: .65rem;
+            }
+        }
+
+        > .left {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex: 1;
+
+            > .icon {
+                font-size: 2rem;
+                width: 3rem;
+                text-align: justify;
+            }
+
+            > .text {
+                flex: 1;
+
+                > .category{
+                    font-size: 1.1rem;
+                }
+
+                > .data {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    > .type {
+                        font-size: .75rem;
+                    }
+
+                    > .date {
+                        font-size: .65rem;
+                    }
+                }
+            }
+        }
+    }
+}

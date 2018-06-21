@@ -7,12 +7,11 @@ import { environment } from './environments/environment';
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
 import regular from '@fortawesome/fontawesome-free-regular';
+import brands from '@fortawesome/fontawesome-free-brands';
 
-fontawesome.library.add(solid.faMapMarkerAlt);
-fontawesome.library.add(solid.faHeart);
-fontawesome.library.add(solid.faUtensils);
-fontawesome.library.add(regular.faChartBar);
-fontawesome.library.add(regular.faListAlt);
+fontawesome.library.add(solid);
+fontawesome.library.add(regular);
+fontawesome.library.add(brands);
 
 if (environment.production) {
   enableProdMode();

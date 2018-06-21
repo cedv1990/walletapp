@@ -1,42 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Account } from '../../shared/entity/account';
-import { AccountDetail } from '../../shared/entity/account.detail';
-import { Category } from '../../shared/entity/category';
-import { PaymentType } from '../../shared/entity/payment.enum';
-import { TypeM } from '../../shared/entity/type.enum';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-
-interface DTODetails {
-  value: number;
-  category: number;
-  type: number;
-  description: string;
-  payment: number;
-  date: string;
-  time: string;
-  from?: number;
-}
-
-interface DTOAccount {
-  id: number;
-  name: string;
-  details: Array<DTODetails>;
-}
+import { Encapsulates } from '../../shared/encapsulates';
+import { TypeM } from '../../shared/entity/type.enum';
 
 @Component({
   selector: 'app-details',
-  templateUrl: './details.component.html'
+  templateUrl: './details.component.html',
+  styleUrls: ['details.component.scss']
 })
 export class DetailsComponent implements OnInit {
 
-  accountsTyped: Array<Account> = new Array<Account>();
+  encapsulates: Encapsulates;
   account: Account;
   id: number;
   private sub: any;
   private navigationSubscription;
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    localStorage.setItem('accounts', '[{"id":2,"name":"pocket","details":[]},{"id":1,"name":"savings","details":[{"value":20000,"category":3,"type":3,"description":"compra","payment":1,"date":"06/18/2018","time":"15:09","from":2},{"value":20000,"category":3,"type":3,"description":"compra","payment":1,"date":"06/18/2018","time":"15:09","from":2}]}]');
+    this.encapsulates = new Encapsulates();
 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
@@ -44,8 +26,6 @@ export class DetailsComponent implements OnInit {
         this.initialiseInvites();
       }
     });
-
-    this.parseAccounts();
   }
 
   ngOnInit() {
@@ -56,34 +36,14 @@ export class DetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
-    this.account = this.accountsTyped.find(x => x.id == this.id);
+    this.account = this.encapsulates.accounts.find(x => x.id == this.id);
   }
 
-  private parseAccounts(): void {
-    const accounts: Array<DTOAccount> = JSON.parse(localStorage.getItem('accounts'));
+  enumTypeString(type: TypeM): string {
+    return TypeM[type - 1];
+  }
 
-    const parseSplit = (str: string) => str.split('/').map(x => parseInt(x));
-
-    accounts.forEach(ac => {
-      let account = new Account();
-      account.id = ac.id;
-      account.name = ac.name;
-      account.details = ac.details.map(det => {
-        const dateParts: number[] = parseSplit(det.date);
-        const timeParts: number[] = parseSplit(det.time);
-
-        let detail = new AccountDetail();
-        detail.category = new Category();
-        detail.date = new Date(dateParts[0], dateParts[1], dateParts[2], timeParts[0], timeParts[1]);
-        detail.description = det.description;
-        detail.payment = <PaymentType>det.payment;
-        detail.type = <TypeM>det.type;
-        detail.value = det.value;
-        if (det.from) detail.from = new Account();
-        return detail;
-      });
-
-      this.accountsTyped.push(account);
-    });
+  dateString(date: Date): string {
+    return `${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
   }
 }

@@ -21,6 +21,7 @@ header{
 
                 &.actual{
                     font-weight: bold;
+                    background-color: $colorDisabled;
                 }
 
                 > span{
@@ -52,6 +53,7 @@ header{
 
                 &.actual{
                     background-color: $colorDisabled;
+                    opacity: 1;
                 }
             }
         }
@@ -73,6 +75,12 @@ header{
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            text-decoration: none;
+
+            &:visited{
+                text-decoration: none;
+                color: $primaryColor;
+            }
 
             &:hover:not(.actual){
                 opacity: 1;

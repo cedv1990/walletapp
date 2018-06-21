@@ -1,5 +1,23 @@
-<h1>
+<section class="encabezado">
   {{account.name}}
-</h1>
-
-{{ account.details.length }}
+</section>
+<section class="datos">
+  <div *ngFor="let detail of account.details">
+    <div class="left">
+      <div class="icon">
+        <i [ngClass]="detail.category.icon"></i>
+      </div>
+      <div class="text">
+        <div class="category">{{detail.category.name}}</div>
+        <div class="data">
+          <div class="type">{{enumTypeString(detail.type)}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="value">
+      <div class="num">{{detail.value}}</div>
+      <div class="hour">{{dateString(detail.date)}}</div>
+    </div>
+  </div>
+</section>
+ 
